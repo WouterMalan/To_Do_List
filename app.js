@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const date = require(__dirname + '/date.js');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -8,14 +9,15 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));//to parse the body of the request
 
 app.get('/', (req, res) => {
+// let day = date.getDate();
 let today = new Date();
 
-let options = {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long'
-};
-let day = today.toLocaleDateString("en-US", options);
+    let options = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+    };
+    let day = today.toLocaleDateString("en-US", options);
 res.render('list', {listTitle: day, newItems: items});
 
 });
